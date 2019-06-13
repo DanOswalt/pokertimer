@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Timer = ({ initialTotalSeconds }) => {
+const Timer = ({ initialTotalSeconds, levelUp }) => {
     let [ currentTotalSeconds, setCurrentTotalSeconds ] = useState(initialTotalSeconds);
     let [ intervalId, setIntervalId ] = useState(null);
     const [ hasBegun, setStart] = useState(false);
@@ -48,6 +48,7 @@ const Timer = ({ initialTotalSeconds }) => {
             setFinished(true);
             clearInterval(intervalId);
             setIntervalId(null);
+            levelUp();
         }
 
         updateTimeDisplay(currentTotalSeconds);
@@ -73,7 +74,7 @@ const Timer = ({ initialTotalSeconds }) => {
         <div className="Timer">
             <p className="currentDisplayTime">{currentDisplayTime}</p>
             {!hasBegun && <button className="btn start" onClick={handleBegin}>Start!</button>}
-            {hasBegun && !isFinished && <button className="btn pauseplay" onClick={toggleTime}>{intervalId ? "Pause" : "Resume"}</button>}
+            {hasBegun && !isFinished && <button className="btn pauseresume" onClick={toggleTime}>{intervalId ? "Pause" : "Resume"}</button>}
             {hasBegun && isFinished && <button className="btn next" onClick={handleRestart}>Next Round</button>}
         </div>
     )
