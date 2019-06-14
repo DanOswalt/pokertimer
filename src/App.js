@@ -39,7 +39,7 @@ const App = () => {
 
   const currentBlinds = blinds[blindIndex];
   const nextBlinds = blinds[blindIndex + 1];
-  const seconds = 5;
+  const seconds = 20 * 60;
   
   const levelUp = () => {
     setBlindIndex( blindIndex => blindIndex + 1);

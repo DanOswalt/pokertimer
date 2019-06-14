@@ -49,7 +49,7 @@ const Timer = ({ initialTotalSeconds, levelUp }) => {
         let minutes = formatAsText(parseInt(currentTime / 60 - (hours * 60)));
         let seconds = formatAsText(parseInt(currentTime - (hours * 60 * 60) - (minutes * 60)));
 
-        const time = `${hours}:${minutes}:${seconds}`;
+        const time = `${minutes}:${seconds}`;
 
         setCurrentDisplayTime(time);
     }
