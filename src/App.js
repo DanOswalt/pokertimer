@@ -29,21 +29,32 @@ const App = () => {
     { small: '60k', big: '120k' },
   ]
 
+  const colors = [
+    "rgba(48, 107, 52, 1)",
+    "rgba(28, 82, 83, 1)",
+    "rgba(243, 255, 198, 1)",
+    "rgba(40, 235, 200, 1)",
+    "rgba(182, 23, 75, 1)"
+  ]
+
   const currentBlinds = blinds[blindIndex];
   const nextBlinds = blinds[blindIndex + 1];
   const seconds = 5;
   
   const levelUp = () => {
-    setBlindIndex( blindIndex + 1 );
+    setBlindIndex( blindIndex => blindIndex + 1);
   }
 
  return (
     <div className="App">
-      <div className="blindsBox">
-        <CurrentBlinds blinds={currentBlinds} />
-        <NextBlinds blinds={nextBlinds} />
+      <div className="Main" style={{backgroundColor: colors[blindIndex % 5]}}>
+        <div className="blindsBox">
+          <CurrentBlinds blinds={currentBlinds} />
+          <NextBlinds blinds={nextBlinds} />
+        </div>
+        <Timer initialTotalSeconds={seconds} levelUp={levelUp}/>
       </div>
-      <Timer initialTotalSeconds={seconds} levelUp={levelUp}/>
+      {/* <div className="Sidebar"></div> */}
     </div>
   );
 }

@@ -1,10 +1,21 @@
 .App {
   display: flex;
   height: 100vh;
-  flex-direction: column;
-  justify-content: flex-start;
   padding: 0px;
   margin: 0px;
+  flex-direction: row;
+}
+
+.Main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-grow: 2;
+}
+
+.Sidebar {
+  display: flex;
+  flex-grow: 1;
 }
 
 .blindsBox {
@@ -34,26 +45,11 @@
   width: 150px;
   border-radius: 15px;
   outline: none;
-  box-shadow: 4px 4px 6px black;
   cursor: pointer;
 }
 
 .Timer .btn:hover {
-  box-shadow: 1px 1px 2px black;
-  margin-right: 3px;
-  margin-top: 3px;
-}
-
-.Timer .btn.start {
-  background: rgb(69, 156, 196);
-}
-
-.Timer .btn.pauseresume {
-  background: rgb(69, 196, 69);
-}
-
-.Timer .btn.next {
-  background: rgb(79, 51, 177);
+  opacity: 0.6;
 }
 
 

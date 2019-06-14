@@ -4,14 +4,13 @@ const Timer = ({ initialTotalSeconds, levelUp }) => {
     let [ currentTotalSeconds, setCurrentTotalSeconds ] = useState(initialTotalSeconds);
     let [ intervalId, setIntervalId ] = useState(null);
     const [ hasBegun, setStart] = useState(false);
-    const [ isFinished, setFinished ] = useState(false);
     const [ currentDisplayTime, setCurrentDisplayTime ] = useState("00:00:00")
 
     useEffect(() => { updateTimeDisplay(initialTotalSeconds) }, []);
 
     const toggleTime = () => {
         // play/pause button should be hidden if not begun or finished, but just in ase
-        if (isFinished || !hasBegun) return;
+        if (!hasBegun) return;
 
         if (intervalId) {
             clearInterval(intervalId);
@@ -32,22 +31,11 @@ const Timer = ({ initialTotalSeconds, levelUp }) => {
         startClock();
     }
 
-    const handleRestart = () => {
-        clearInterval(intervalId);
-        setCurrentTotalSeconds(initialTotalSeconds);
-        setStart(false);
-        setFinished(false);
-        updateTimeDisplay(initialTotalSeconds);
-    }       
-
     const countdown = () => {
         setCurrentTotalSeconds(currentTotalSeconds--);
         
         if (currentTotalSeconds === 0) {
-            console.log(intervalId)
-            setFinished(true);
-            clearInterval(intervalId);
-            setIntervalId(null);
+            currentTotalSeconds = initialTotalSeconds;
             levelUp();
         }
 
@@ -74,8 +62,7 @@ const Timer = ({ initialTotalSeconds, levelUp }) => {
         <div className="Timer">
             <p className="currentDisplayTime">{currentDisplayTime}</p>
             {!hasBegun && <button className="btn start" onClick={handleBegin}>Start!</button>}
-            {hasBegun && !isFinished && <button className="btn pauseresume" onClick={toggleTime}>{intervalId ? "Pause" : "Resume"}</button>}
-            {hasBegun && isFinished && <button className="btn next" onClick={handleRestart}>Next Round</button>}
+            {hasBegun && <button className="btn pauseresume" onClick={toggleTime}>{intervalId ? "Pause" : "Resume"}</button>}
         </div>
     )
 
